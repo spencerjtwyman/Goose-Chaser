@@ -1,0 +1,42 @@
+# how to set up / connect a camera to ROS
+# plug camera in to odroid USB input
+
+# installs open CV and numpy
+sudo apt update
+sudo apt install python3-opencv python3-pip
+pip3 install numpy
+
+# lists video inputs to computer
+ls /dev/video*
+
+# test camera functions
+# File: test_camera.py
+import cv2
+
+# Initialize the camera
+cap = cv2.VideoCapture(0)  # 0 is the index of the camera
+
+# Check if the camera opened successfully
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+# Capture frame-by-frame
+ret, frame = cap.read()
+
+# If frame is read correctly, ret is True
+if not ret:
+    print("Can't receive frame (stream end?). Exiting ...")
+else:
+    cv2.imshow('frame', frame)
+    cv2.waitKey(0)  # Press any key to close the window
+
+# When everything done, release the capture
+cap.release()
+cv2.destroyAllWindows()
+
+# test
+python3 test_camera.py
+
+
+
