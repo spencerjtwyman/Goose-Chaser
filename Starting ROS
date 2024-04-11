@@ -1,0 +1,25 @@
+# setting up ROS (must have Ubuntu 18.04)
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+
+#installation
+sudo apt update
+sudo apt install ros-melodic-desktop-full
+sudo rosdep init
+rosdep update
+
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+
+#test
+#Start ROS
+roscore &
+
+# In a new terminal test talker 
+rosrun rospy_tutorials talker
+# In another new terminal test listener
+rosrun rospy_tutorials listener
+
+
+
